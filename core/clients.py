@@ -373,9 +373,11 @@ class MongoDBClient(ApiClient):
             else:
                 logger.critical("A Mongo URI is necessary for the bot to function.")
                 raise RuntimeError
-
+                
+        db_name = bot.config["mongo_db_name"]
+        
         try:
-            db = AsyncIOMotorClient(mongo_uri).modmail_bot
+            db = AsyncIOMotorClient(mongo_uri)[db_name]
         except ConfigurationError as e:
             logger.critical(
                 "Your MongoDB CONNECTION_URI might be copied wrong, try re-copying from the source again. "
