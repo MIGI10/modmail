@@ -147,7 +147,6 @@ app.json
 CHANGELOG.md
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
-requirements.min.txt
 Procfile
 pyproject.toml
 README.md

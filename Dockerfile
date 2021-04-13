@@ -1,11 +1,9 @@
-FROM python:3.7-alpine
+FROM python:3.7-slim as py
+
 ENV USING_DOCKER yes
+
+COPY requirements.min.txt /
+RUN pip install --no-cache-dir -r /requirements.min.txt && rm /requirements.min.txt
+
 WORKDIR /modmailbot
-COPY . /modmailbot
-RUN  export PIP_NO_CACHE_DIR=false \
-    && apk update \
-    && apk add --update --no-cache --virtual .build-deps alpine-sdk \
-    && pip install pipenv \
-    && pipenv install --deploy --ignore-pipfile \
-    && apk del .build-deps
-CMD ["pipenv", "run", "bot"]
+CMD ["python", "bot.py"]
