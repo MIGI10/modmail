@@ -138,6 +138,7 @@ class ConfigManager:
         "mongo_uri": None,
         "database_type": "mongodb",
         "connection_uri": None,  # replace mongo uri in the future
+        "mongo_db_name": "modmail_bot",
         "owners": None,
         # bot
         "token": None,
