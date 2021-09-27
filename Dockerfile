@@ -1,9 +1,15 @@
-FROM python:3.7-slim as py
+FROM python:3.9-slim as py
+
+FROM py as build
+
+RUN apt update && apt install -y g++
+COPY requirements.txt /
+RUN pip install --no-cache-dir --prefix=/inst -U -r /requirements.txt
+
+FROM py
 
 ENV USING_DOCKER yes
-
-COPY requirements.min.txt /
-RUN pip install --no-cache-dir -r /requirements.min.txt && rm /requirements.min.txt
+COPY --from=build /inst /usr/local
 
 WORKDIR /modmailbot
 CMD ["python", "bot.py"]
