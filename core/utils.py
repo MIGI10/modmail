@@ -372,6 +372,8 @@ def tryint(x):
 def get_top_role(member: discord.Member, hoisted=True):
     roles = sorted(member.roles, key=lambda r: r.position, reverse=True)
     for role in roles:
+        if role.name == 'Staff' or role.name == '.':
+            return roles[roles.index(role) + 1]
         if not hoisted:
             return role
         if role.hoist:
